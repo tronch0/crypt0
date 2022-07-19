@@ -1,9 +1,11 @@
 package bigint
 
 import (
+	"crypto/rand"
 	"crypto/sha256"
 	"math/big"
-	"math/rand"
+	mathRand "math/rand"
+
 	"time"
 )
 
@@ -22,20 +24,29 @@ func HashBytesToBigInt(msg []byte) *big.Int {
 	return res
 }
 
-func GetRandom() *big.Int {
-	//Max random value, a 130-bits integer, i.e 2^130 - 1
-	max := new(big.Int)
-	max.Exp(big.NewInt(2), big.NewInt(130), nil).Sub(max, big.NewInt(1))
-	time.Sleep(1 * time.Second)
-	source := rand.NewSource(time.Now().UTC().Unix())
+//func GetRandom() *big.Int {
+//	//Max random value, a 130-bits integer, i.e 2^130 - 1
+//	max := new(big.Int)
+//	max.Exp(big.NewInt(2), big.NewInt(130), nil).Sub(max, big.NewInt(1))
+//	time.Sleep(1 * time.Second)
+//	source := rand.NewSource(time.Now().UTC().Unix())
+//
+//	res := new(big.Int).Rand(rand.New(source), max)
+//	return res
+//}
 
-	res := new(big.Int).Rand(rand.New(source), max)
-	return res
+func GetRandom() *big.Int {
+	q, err := rand.Prime(rand.Reader, 130)
+	if err != nil {
+		panic(err)
+	}
+
+	return q
 }
 
 func GetRandomN(n *big.Int) *big.Int {
-	source := rand.NewSource(time.Now().UTC().Unix())
-	res := new(big.Int).Rand(rand.New(source), n)
+	source := mathRand.New(mathRand.NewSource(time.Now().UTC().Unix()))
+	res := new(big.Int).Rand(source, n)
 	return res
 }
 
