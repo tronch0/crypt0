@@ -3,7 +3,7 @@ crypt0
 =================================================
 
 crypt0 contains the implementation of common cryptographic building blocks, from Field Element to more complex implementations, such as secret sharing schemes and homomorphic encryption.
-## This package contains
+## What's inside
 * Field element
 * Big Int utils
 * RSA digital signature algorithm
