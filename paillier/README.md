@@ -57,6 +57,3 @@ if err != nil {
 
 ## Warning
 This library was created primarily for education purposes, with future application for a course project. You should **NOT USE THIS CODE IN PRODUCTION SYSTEMS**.
-
-[papper](https://link.springer.com/content/pdf/10.1007%2F3-540-48910-X_16.pdf)
-
