@@ -9,6 +9,19 @@ import (
 
 const KEY_LENGTH = 3072
 
+type PrivateKey struct {
+	PublicKey
+	p *big.Int
+	q *big.Int
+	n *big.Int
+}
+
+type PublicKey struct {
+	N  *big.Int
+	NN *big.Int
+	G  *big.Int
+}
+
 func GenerateKey(random io.Reader) (*PrivateKey, error) {
 	primeSize := KEY_LENGTH / 2
 
@@ -35,19 +48,6 @@ func GenerateKey(random io.Reader) (*PrivateKey, error) {
 		n: n,
 	}, nil
 
-}
-
-type PrivateKey struct {
-	PublicKey
-	p *big.Int
-	q *big.Int
-	n *big.Int
-}
-
-type PublicKey struct {
-	N  *big.Int
-	NN *big.Int
-	G  *big.Int
 }
 
 func Encrypt(pubKey *PublicKey, plainText []byte) ([]byte, error) {
